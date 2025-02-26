@@ -1,0 +1,29 @@
+{
+  "name": "market_place_backend",
+  "version": "1.0.0",
+  "description": "Backend of marketplace api implement all their schemas and api endpoints",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "npm index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karnveer-Thour/Marketplace_backend.git"
+  },
+  "keywords": [
+    "customer",
+    "provider"
+  ],
+  "author": "Thour",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karnveer-Thour/Marketplace_backend/issues"
+  },
+  "homepage": "https://github.com/Karnveer-Thour/Marketplace_backend#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.2"
+  }
+}
