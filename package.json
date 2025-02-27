@@ -4,7 +4,7 @@
   "description": "Backend of marketplace api implement all their schemas and api endpoints",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon Server.js",
     "test": "npm index.js"
   },
   "repository": {
