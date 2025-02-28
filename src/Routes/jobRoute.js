@@ -4,7 +4,7 @@ const { jobModel } = require('../Models');
 router.get('/Create',async(req,res)=>{
     try{
         const newJob=await jobModel.insertOne({
-            Recruiter_id:"67c01823250b60f02305f88f",
+            Recruiter_id:"67c184b4b2897dabcc486f6f",
             Job_title:"jdksljldkjkldsjkdsjds",
             Budget:3000,
             Service_type:"programmer",

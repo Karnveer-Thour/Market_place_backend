@@ -3,10 +3,14 @@ const { default: mongoose } = require("mongoose");
 const schema=new mongoose.Schema({
     senderId:{
         type: mongoose.Schema.ObjectId,
+        ref:"providers",
+        ref:"customers",
         required: true
     },
     recieverId:{
         type: mongoose.Schema.ObjectId,
+        ref:"providers",
+        ref:"customers",
         required: true
     },
     description:{
@@ -20,4 +24,4 @@ const schema=new mongoose.Schema({
 },{
     timestamps:true
 })
-module.export=mongoose.model('Chat',schema);
+module.exports=mongoose.model('Chats',schema);

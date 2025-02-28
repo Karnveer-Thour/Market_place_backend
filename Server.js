@@ -1,16 +1,19 @@
 require('dotenv').config();
 const express=require('express');
-const mongoose=require('./src/Database/mongoose.database.js');
-const {  customerRoute, providerRoute, serviceRoute, jobRoute } = require('./src/Routes/index.js');
+const {  customerRoute, providerRoute, serviceRoute, jobRoute, home, chatRoute, feedbackRoute, paymentRoute } = require('./src/Routes/Index.Route.js');
 const { Mongoose } = require('./src/Database/index.js');
 const app=express();
 const port=process.env.port;
 const URL=process.env.URL;
 
+app.use('/',home);
 app.use('/client',customerRoute);
 app.use('/seller',providerRoute);
 app.use('/job',jobRoute);
 app.use('/service',serviceRoute);
+app.use('/chat',chatRoute);
+app.use('/feedback',feedbackRoute);
+app.use('/payment',paymentRoute)
 
 app.listen(port,()=>{
     console.log("App is listening at",port);

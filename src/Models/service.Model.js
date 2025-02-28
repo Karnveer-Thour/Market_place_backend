@@ -3,7 +3,7 @@ const { default: mongoose } = require("mongoose");
 const schema=new mongoose.Schema({
     Service_provider_id:{
         type: mongoose.Schema.ObjectId,
-        ref: "Provider",
+        ref: "Providers",
         required:true
     },
     Service_title:{
@@ -28,10 +28,6 @@ const schema=new mongoose.Schema({
         type: Number,
         default: 0,
       },
-    Date_time_creation:{
-        type: Date,
-        default: Date.now()
-    }
 })
 
 module.exports=mongoose.model('Services',schema);
