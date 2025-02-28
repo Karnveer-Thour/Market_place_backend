@@ -13,5 +13,5 @@ module.exports ={
     serviceRoute:require('./serviceRoute'),
     chatRoute: require('./chatRoute'),
     feedbackRoute:require('./feedback.Route'),
-    paymentRoute: require('./payment.Route')
+    paymentRoute: require('./payment.Route'),
 }

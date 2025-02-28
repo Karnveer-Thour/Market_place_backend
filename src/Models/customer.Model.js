@@ -22,14 +22,12 @@ const schema = new mongoose.Schema({
         type:Boolean,
         required:true
     },
-    date_register: {
-      type: Date,
-      default: Date.now(),
-    },
     rating: {
       type: Number,
       default: 0,
     }
+},{
+  timestamps:true,
 });
 
 module.exports= mongoose.model('Customers',schema);
