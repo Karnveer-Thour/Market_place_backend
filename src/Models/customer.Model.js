@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     Customer_ID: String,
     Manual_Login: {
         type:Boolean,
-        required:true
+        default:true
     },
     rating: {
       type: Number,
