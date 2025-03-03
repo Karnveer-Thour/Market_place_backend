@@ -1,23 +1,17 @@
 const express=require('express');
-const { providerModel } = require('../Models');
+const { providerMiddlewares, fetchUser, customerMiddlewares } = require('../Middleware/Index');
+const { providerControllers, customerControllers } = require('../Controllers/Index');
 const router = express.Router({ mergeParams: true })
-router.get("/Create",async(req,res)=>{
-     try{
-            const registered_Email=await providerModel.findOne({Email:"karan34456@gmail.com"});
-            if(registered_Email){
-                res.status(400).json("Email already registered");
-                return;
-            }
-            const User=await providerModel.insertOne({
-                name:"Karanveer",
-                Email:"karan34456@gmail.com",
-                password:"fdjkdfhdfh",
-                Manual_Login:true,
-                Category:"Programmer"
-            });
-            res.send(User);
-        }catch(err){
-            res.status(500).json("Unable to create a user due to ",err.message);
-        }
-})
+// Register route for provider
+router.route('/register').post(customerMiddlewares.validateRegister,providerMiddlewares.existing,providerControllers.register);
+
+// Login route for provider
+router.route('/login').post(customerMiddlewares.validateLogin,providerControllers.login);
+
+//Get route for provider
+router.route('/get').post(fetchUser,providerControllers.get);
+
+//Delete route for Provider
+router.route('/delete').post(fetchUser,providerControllers.remove);
+
 module.exports=router;

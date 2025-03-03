@@ -1,4 +1,5 @@
 module.exports={
     customerMiddlewares:require('./customer.middlewares'),
-    fetchUser:require('./fetchUser.middleware')
+    providerMiddlewares: require("./provider.middlewares"),
+    fetchUser:require('./fetchUser.middleware'),
 }
