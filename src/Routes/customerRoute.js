@@ -13,6 +13,6 @@ router.route("/login").post(customerMiddlewares.validateLogin,customerController
 router.route("/get").post(fetchUser,customerControllers.get);
 
 //Deleteuser route for customer
-router.route("/delete").post(fetchUser,customerControllers.remove);
+router.route("/delete").delete(fetchUser,customerControllers.remove);
 
 module.exports=router;

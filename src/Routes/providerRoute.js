@@ -12,6 +12,6 @@ router.route('/login').post(customerMiddlewares.validateLogin,providerController
 router.route('/get').post(fetchUser,providerControllers.get);
 
 //Delete route for Provider
-router.route('/delete').post(fetchUser,providerControllers.remove);
+router.route('/delete').delete(fetchUser,providerControllers.remove);
 
 module.exports=router;

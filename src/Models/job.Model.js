@@ -33,9 +33,7 @@ const schema=new mongoose.Schema({
         type: String,
         default: "Pending"
     },
-    Date_time_creation:{
-        type: Date,
-        default: Date.now()
-    }
+},{
+    timestamps:true
 });
 module.exports= mongoose.model('Jobs',schema);
