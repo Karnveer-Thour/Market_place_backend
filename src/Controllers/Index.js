@@ -3,4 +3,5 @@ module.exports = {
   providerControllers: require("./provider.Controllers"),
   jobControllers: require("./job.Controllers"),
   serviceControllers: require("./service.Controllers"),
+  paymentControllers: require("./payment.Controllers"),
 };

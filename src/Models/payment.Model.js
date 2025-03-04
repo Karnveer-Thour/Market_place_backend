@@ -14,13 +14,16 @@ const schema = new mongoose.Schema(
     },
     amount: {
       type: Number,
-      default: 0,
       required: true,
     },
-    description: String,
+    description: {
+      type: String,
+      default: "Payment",
+    },
     status: {
       type: String,
-      required: true,
+      default:"Success",
+      enum: ["Success", "Failed"],
     },
   },
   {

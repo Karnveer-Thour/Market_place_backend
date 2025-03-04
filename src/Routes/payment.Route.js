@@ -1,14 +1,17 @@
 const express = require("express");
 const { paymentModel } = require("../Models");
+const { paymentControllers } = require("../Controllers/Index");
+const { fetchUser, paymentMiddlewares } = require("../Middleware/Index");
 
 const router = express.Router({ mergeParams: true });
-router.get("/send", async (req, res) => {
-  const newChat = await paymentModel.insertOne({
-    payerId: "67c184b4b2897dabcc486f6f",
-    recieverId: "67c185310a256b69edcb27b1",
-    status: "Sent",
-    amount: 300,
-  });
-  res.send(newChat);
-});
+
+// Route to send payment
+router.route('/send').post(fetchUser,paymentMiddlewares.validatePayment,paymentControllers.sendPayment);
+
+// Route to get all payments
+router.route('/').get(fetchUser,paymentControllers.getAllPayments);
+
+// Route to get a particulaer payment
+router.route('/get').get(fetchUser,paymentControllers.getPayment);
+
 module.exports = router;

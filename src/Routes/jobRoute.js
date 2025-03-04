@@ -9,7 +9,7 @@ router
   .post(fetchUser,jobsMiddlewares.validateJob,jobControllers.create);
 
 // Get all jobs by particular user id
-router.route("/get/all").get(fetchUser,jobControllers.getJobs);
+router.route("/").get(fetchUser,jobControllers.getJobs);
 
 //get particular job by its id
 router.route("/get").get(fetchUser,jobControllers.get);

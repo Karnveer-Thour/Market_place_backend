@@ -9,7 +9,7 @@ router
   .post(fetchUser,serviceMiddlewares.validateJob,serviceControllers.create);
 
 // Get all Services by particular user id
-router.route("/get/all").get(fetchUser,serviceControllers.getServices);
+router.route("/").get(fetchUser,serviceControllers.getServices);
 
 //get particular Service by its id
 router.route("/get").get(fetchUser,serviceControllers.get);

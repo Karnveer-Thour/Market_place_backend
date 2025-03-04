@@ -2,7 +2,6 @@ const { jobModel } = require("../Models");
 
 // Create job controller
 const create = async (req, res) => {
-  console.log(req.user);
   try {
     const Job = await jobModel.insertOne({...req.body,Recruiter_id:req.user});
     res.status(201).json({

@@ -16,7 +16,7 @@ const validateJob = [
     .notEmpty()
     .isInt({ min: 100 }),
   body("Service_type", "type of service can't be empty").notEmpty(),
-  body("Service_description", "Description Minimum have 30 characters").isLength({ min: 30 }),
+  body("Job_description", "Description Minimum have 30 characters").isLength({ min: 30 }),
   body("Keywords", "Keywords requires atleast one").notEmpty(),
   (req, res, next) => {
     const errors = validationResult(req);

@@ -2,7 +2,6 @@ const { serviceModel } = require("../Models");
 
 // Controller to create service
 const create = async (req, res) => {
-  console.log(req.user);
   try {
     if (!req.user) {
       return res.status(401).send({ reason: "User id not found" });
