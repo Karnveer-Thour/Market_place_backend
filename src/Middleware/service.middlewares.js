@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const validateJob = [
-  body("Job_title", "Job title can't be empty and not contain numbers")
+  body("Service_title", "Service title can't be empty and not contain numbers")
     .notEmpty()
     .custom((value) => {
       // Check if the title contains any numbers
@@ -12,7 +12,7 @@ const validateJob = [
       }
       return true; // Validation passed
     }),
-  body("Budget", "budget can,t be empty and not be less than 100")
+  body("Price", "Price can,t be empty and not be less than 100")
     .notEmpty()
     .isInt({ min: 100 }),
   body("Service_type", "type of service can't be empty").notEmpty(),
@@ -21,7 +21,7 @@ const validateJob = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(401).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
     }
     next();
   },

@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 
-const schema = new mongoose.Schema({
+const schema = new mongoose.Schema(
+  {
     name: {
       type: String,
       minLength: [5, "Name must be at least 5 characters long"],
@@ -19,15 +20,17 @@ const schema = new mongoose.Schema({
     picture: String,
     Customer_ID: String,
     Manual_Login: {
-        type:Boolean,
-        default:true
+      type: Boolean,
+      default: true,
     },
     rating: {
       type: Number,
       default: 0,
-    }
-},{
-  timestamps:true,
-});
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports= mongoose.model('Customers',schema);
+module.exports = mongoose.model("Customers", schema);

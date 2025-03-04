@@ -1,15 +1,24 @@
-const express=require('express');
-const { serviceModel } = require('../Models');
-const router=express.Router();
-router.get('/Create',async(req,res)=>{
-        const newJob=await serviceModel.insertOne({
-            Service_provider_id:"67c185310a256b69edcb27b1",
-            Service_title:"jdksljldkjkldsjkdsjds",
-            Price:3000,
-            Service_type:"programmer",
-            Service_description:"hfjkhfkhkfdhjhdkjhkjfdhfhkjhkh",
-            Keywords:["dkjlkajlkdjkaljd"],
-        });
-        res.send(newJob);
-})
-module.exports=router;
+const express = require("express");
+const { serviceMiddlewares, fetchUser } = require("../Middleware/Index");
+const { serviceControllers } = require("../Controllers/Index");
+const router = express.Router();
+
+// Route for create service
+router
+  .route("/create")
+  .post(fetchUser,serviceMiddlewares.validateJob,serviceControllers.create);
+
+// Get all Services by particular user id
+router.route("/get/all").get(fetchUser,serviceControllers.getServices);
+
+//get particular Service by its id
+router.route("/get").get(fetchUser,serviceControllers.get);
+
+// Update a particular Service
+router.route("/update").patch(fetchUser,serviceControllers.update);
+
+// Update a particular Service
+router.route("/delete").delete(fetchUser,serviceControllers.remove);
+
+
+module.exports = router;

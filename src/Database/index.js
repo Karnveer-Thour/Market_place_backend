@@ -1,3 +1,3 @@
-module.exports={
-    Mongoose:require('./mongoose.database')
-}
+module.exports = {
+  Mongoose: require("./mongoose.database"),
+};

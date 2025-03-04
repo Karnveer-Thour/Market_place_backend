@@ -1,44 +1,50 @@
 const { body, validationResult } = require("express-validator");
 const customerModel = require("../Models/customer.Model");
 // Validate customer Registration
-const validateRegister=[
-    body('name','Name cannot be empty').notEmpty(),
-    body('Email',"Enter a valid email").isEmail(),
-    body('password',"Password must be of minimum 8 Characters").isLength({min:8}),
-    (req,res,next)=>{
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(401).json({ errors: errors.array() });
-        }
-        next();
+const validateRegister = [
+  body("name", "Name cannot be empty").notEmpty(),
+  body("Email", "Enter a valid email").isEmail(),
+  body("password", "Password must be of minimum 8 Characters").isLength({
+    min: 8,
+  }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(401).json({ errors: errors.array() });
     }
+    next();
+  },
 ];
 
 // check customer email duplicacy at Registration
-const existing=async(req,res,next)=>{
-    const email=new RegExp(req.body.Email,"i");
-      // Check whether the user with this email already exists
-      const existingUser = await customerModel.findOne({ Email: email });
+const existing = async (req, res, next) => {
+  const email = new RegExp(req.body.Email, "i");
+  // Check whether the user with this email already exists
+  const existingUser = await customerModel.findOne({ Email: email });
 
-      if (existingUser) {
-        // If the user exists, send an error response
-        return res.status(401).json({ message: "Email is already registered." });
-      }
-      next();
-}
+  if (existingUser) {
+    // If the user exists, send an error response
+    return res.status(401).json({ message: "Email is already registered." });
+  }
+  next();
+};
 
 // Validate customer Login
-const validateLogin=[
-    body('Email',"Enter a valid email").isEmail(),
-    body('password',"Password must be of minimum 8 Characters").isLength({min:8}),
-    (req,res,next)=>{
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(401).json({ errors: errors.array() });
-        }
-        next();
+const validateLogin = [
+  body("Email", "Enter a valid email").isEmail(),
+  body("password", "Password must be of minimum 8 Characters").isLength({
+    min: 8,
+  }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(401).json({ errors: errors.array() });
     }
+    next();
+  },
 ];
-module.exports={
-    validateRegister,existing,validateLogin
-}
+module.exports = {
+  validateRegister,
+  existing,
+  validateLogin,
+};
