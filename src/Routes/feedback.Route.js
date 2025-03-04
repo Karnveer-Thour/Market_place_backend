@@ -1,14 +1,22 @@
 const express = require("express");
-const { feedbackModel } = require("../Models");
+const { feedbackMiddlewares, fetchUser } = require("../Middleware/Index");
+const { feedbackControllers } = require("../Controllers/Index");
 
 const router = express.Router({ mergeParams: true });
-router.get("/send", async (req, res) => {
-  const newChat = await feedbackModel.insertOne({
-    senderId: "67c184b4b2897dabcc486f6f",
-    recieverId: "67c185310a256b69edcb27b1",
-    description: "Hello",
-    rating: 3,
-  });
-  res.send(newChat);
-});
+
+// Route to send feedback
+router.route("/send").post(fetchUser,feedbackMiddlewares.validateFeedback,feedbackControllers.send);
+
+// Route to get feedbacks
+router.route("/").get(fetchUser,feedbackControllers.getFeedbacks);
+
+//Route to fetch a particular feedback
+router.route("/get").get(fetchUser,feedbackControllers.getFeedback);
+
+//Route to update a particular feedback
+router.route("/update").patch(fetchUser,feedbackControllers.updateFeedback);
+
+//Route to delete a particular feedback
+router.route("/delete").delete(fetchUser,feedbackControllers.deleteFeedback);
+
 module.exports = router;

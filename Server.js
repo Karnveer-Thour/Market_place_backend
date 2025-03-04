@@ -21,7 +21,7 @@ app.use("/provider", providerRoute);
 app.use("/jobs", jobRoute);
 app.use("/services", serviceRoute);
 app.use("/chat", chatRoute);
-app.use("/feedback", feedbackRoute);
+app.use("/feedbacks", feedbackRoute);
 app.use("/payments", paymentRoute);
 
 app.listen(port, () => {

@@ -33,11 +33,8 @@ const getAllPayments=async(req,res)=>{
         if(!req.user){
             return res.status(401).send({reason:"User id not found"});
         }
-        if(!req.header("id")){
-            return res.status(401).send({reason:"id not found"});
-        }
         const Payments=await paymentModel.find({
-            payerId:req.user,recieverId:req.header("id")
+            payerId:req.user
         });
         if(Payments.length===0){
             return res.status(404).json({
@@ -47,7 +44,7 @@ const getAllPayments=async(req,res)=>{
         }
         res.status(200).json({
             success:true,
-            message:"All payments",
+            message:"All payments fetched successfully",
             Details:Payments,
         });
     }catch(err){
@@ -65,11 +62,11 @@ const getPayment=async(req,res)=>{
         if(!req.user){
             return res.status(401).send({reason:"User id not found"});
         }
-        if(!req.header("id")){
+        if(!req.query.id){
             return res.status(401).send({reason:"id not found"});
         }
         const Payment=await paymentModel.findOne({
-            _id:req.header("id"),
+            _id:req.query.id,
             payerId:req.user
         });
         if(!Payment){
@@ -80,7 +77,7 @@ const getPayment=async(req,res)=>{
         }
         res.status(200).json({
             success:true,
-            message:"Payment",
+            message:"Payment fetched successfully",
             Details:Payment,
         });
     }catch(err){
@@ -91,5 +88,6 @@ const getPayment=async(req,res)=>{
           });
     }
 }
+
 
 module.exports = {sendPayment,getAllPayments,getPayment};

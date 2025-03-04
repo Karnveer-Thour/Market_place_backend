@@ -1,5 +1,4 @@
 const express = require("express");
-const { paymentModel } = require("../Models");
 const { paymentControllers } = require("../Controllers/Index");
 const { fetchUser, paymentMiddlewares } = require("../Middleware/Index");
 

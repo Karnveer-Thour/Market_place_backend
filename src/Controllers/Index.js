@@ -4,4 +4,5 @@ module.exports = {
   jobControllers: require("./job.Controllers"),
   serviceControllers: require("./service.Controllers"),
   paymentControllers: require("./payment.Controllers"),
+  feedbackControllers: require("./feedback.Controllers"),
 };

@@ -54,11 +54,11 @@ const get = async (req, res) => {
     if (!req.user) {
       return res.status(401).send({ reason: "User id not found" });
     }
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
     const Service = await serviceModel.findOne({
-      _id: req.header("id"),
+      _id: req.query.id,
       Service_provider_id: req.user,
     });
     if (!Service) {
@@ -84,11 +84,14 @@ const update = async (req, res) => {
     return res.status(401).send({ reason: "User id not found" });
   }
   try {
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
     const Service = await serviceModel.findOneAndUpdate(
-      { _id: req.header("id"), Service_provider_id: req.user },
+      {
+        _id: req.query.id,
+        Service_provider_id: req.user,
+      },
       req.body,
       { new: true }
     );
@@ -115,11 +118,11 @@ const remove = async (req, res) => {
     return res.status(401).send({ reason: "User id not found" });
   }
   try {
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
     const Service = await serviceModel.findOneAndDelete({
-      _id: req.header("id"),
+      _id: req.query.id,
       Service_provider_id: req.user,
     });
     if (!Service) {

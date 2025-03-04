@@ -4,5 +4,6 @@ module.exports = {
   jobsMiddlewares: require("./job.middlewares"),
   serviceMiddlewares: require("./service.middlewares"),
   paymentMiddlewares: require("./payment.middlewares"),
+  feedbackMiddlewares: require("./feedback.middlewares"),
   fetchUser: require("./fetchUser.middleware"),
 };

@@ -4,15 +4,23 @@ const schema = new mongoose.Schema(
   {
     senderId: {
       type: mongoose.Schema.ObjectId,
-      ref: "providers",
-      ref: "customers",
       required: true,
+      refPath: "senderType", // Dynamically reference based on senderType
     },
-    recieverId: {
-      type: mongoose.Schema.ObjectId,
-      ref: "providers",
-      ref: "customers",
+    senderType: {
+      type: String,
       required: true,
+      enum: ["Customers", "Providers"], // Specify allowed collections
+    },
+    receiverId: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+      refPath: "receiverType", // Dynamically reference based on receiverType
+    },
+    receiverType: {
+      type: String,
+      required: true,
+      enum: ["Customers", "Providers"], // Specify allowed collections
     },
     description: {
       type: String,

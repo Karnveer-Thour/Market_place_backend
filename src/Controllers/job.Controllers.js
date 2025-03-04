@@ -45,10 +45,10 @@ const getJobs = async (req, res) => {
 //Get job by particular id
 const get = async (req, res) => {
   try {
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
-    const job = await jobModel.findOne({ _id: req.header("id"),Recruiter_id:req.user });
+    const job = await jobModel.findOne({ _id: req.query.id,Recruiter_id:req.user });
     if (!job) {
       return res.status(404).send({ reason: "No job found" });
     }
@@ -69,11 +69,11 @@ const get = async (req, res) => {
 //Update a particular job
 const update = async (req, res) => {
   try {
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
     const job = await jobModel.findOneAndUpdate(
-      { _id: req.header("id"),Recruiter_id:req.user },
+      { _id: req.query.id,Recruiter_id:req.user },
       req.body,
       { new: true }
     );
@@ -97,10 +97,10 @@ const update = async (req, res) => {
 //Delete a particular job
 const remove = async (req, res) => {
   try {
-    if (!req.header("id")) {
+    if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
-    const job = await jobModel.findOneAndDelete({ _id: req.header("id"),Recruiter_id:req.user });
+    const job = await jobModel.findOneAndDelete({ _id: req.query.id,Recruiter_id:req.user });
     if (!job) {
       return res.status(404).send({ reason: "No job found" });
     }
