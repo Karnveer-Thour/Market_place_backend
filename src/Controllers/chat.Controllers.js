@@ -9,7 +9,7 @@ const Send = async (req, res) => {
     const data = await chatModel.insertOne({
       ...req.body,
       senderId: req.userID,
-      recieverId: req.header("id"),
+      receiverId: req.header("id"),
     });
     return res.status(201).json({
       success: true,
@@ -30,10 +30,10 @@ const Fetch = async (req, res) => {
   try {
     const sendedMessages = await chatModel.find({
       senderId: req.userID,
-    });
+    }).populate("senderId").populate("receiverId");
     const recienvedMessages = await chatModel.find({
       recieverId: req.userID,
-    });
+    }).populate("senderId").populate("receiverId");
     const Messages = [...sendedMessages, ...recienvedMessages];
     if (Messages.length === 0) {
       return res.status(404).send({ Reason: "Messages not found" });

@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
     },
     recieverId: {
       type: mongoose.Schema.ObjectId,
-      ref: "providers",
+      ref: "Providers",
       required: true,
     },
     amount: {

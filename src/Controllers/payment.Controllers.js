@@ -29,7 +29,7 @@ const getAllPayments=async(req,res)=>{
     try{
         const Payments=await paymentModel.find({
             payerId:req.userID
-        });
+        }).populate("payerId recieverId");
         if(Payments.length===0){
             return res.status(404).json({
                 success:false,
@@ -59,7 +59,7 @@ const getPayment=async(req,res)=>{
         const Payment=await paymentModel.findOne({
             _id:req.query.id,
             payerId:req.userID
-        });
+        }).populate("payerId recieverId");
         if(!Payment){
             return res.status(404).json({
                 success:false,

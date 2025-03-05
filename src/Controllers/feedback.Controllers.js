@@ -29,7 +29,7 @@ const send = async (req, res) => {
 const getFeedbacks = async (req, res) => {
   try {
     const feedbacks = await feedbackModel
-      .find({ receiverId: req.userID }).populate('receiverId').populate('senderId');
+      .find({ receiverId: req.userID }).populate('receiverId').populate('senderId').populate('receiverId').populate('senderId');
     if (feedbacks.length === 0) {
       return res.status(404).json({
         success: false,
