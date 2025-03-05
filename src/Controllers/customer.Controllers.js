@@ -66,8 +66,7 @@ const login = async (req, res) => {
 // Get customer
 const get = async (req, res) => {
   try {
-    const userId = req.user;
-    const user = await customerModel.findById(userId).select("-password");
+    const user = await customerModel.findById(req.userID).select("-password");
     if (!user) {
       return res.status(401).send({ Reason: "User not found" });
     }
@@ -84,8 +83,7 @@ const get = async (req, res) => {
 // Delete Customer
 
 const remove = async (req, res) => {
-  const userId = req.user;
-  const user = await customerModel.findOne({ _id: userId });
+  const user = await customerModel.findOne({ _id: req.userID });
   if (!user) {
     return res.status(401).send({ Reason: "User not found" });
   }

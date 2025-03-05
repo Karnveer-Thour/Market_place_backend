@@ -2,15 +2,12 @@ const { paymentModel } = require("../Models");
 // Route to send payment
 const sendPayment=async(req,res)=>{
     try{
-        if(!req.user){
-            return res.status(401).send({reason:"User id not found"});
-        }
         if(!req.header("id")){
             return res.status(401).send({reason:"id not found"});
         }
         const Payment=await paymentModel.insertOne({
             ...req.body,
-            payerId:req.user,
+            payerId:req.userID,
             recieverId:req.header("id")
         });
         res.status(201).json({
@@ -30,11 +27,8 @@ const sendPayment=async(req,res)=>{
 // route to fetch all payments
 const getAllPayments=async(req,res)=>{
     try{
-        if(!req.user){
-            return res.status(401).send({reason:"User id not found"});
-        }
         const Payments=await paymentModel.find({
-            payerId:req.user
+            payerId:req.userID
         });
         if(Payments.length===0){
             return res.status(404).json({
@@ -59,15 +53,12 @@ const getAllPayments=async(req,res)=>{
 //route to fetch a particular payments
 const getPayment=async(req,res)=>{
     try{
-        if(!req.user){
-            return res.status(401).send({reason:"User id not found"});
-        }
         if(!req.query.id){
             return res.status(401).send({reason:"id not found"});
         }
         const Payment=await paymentModel.findOne({
             _id:req.query.id,
-            payerId:req.user
+            payerId:req.userID
         });
         if(!Payment){
             return res.status(404).json({

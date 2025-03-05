@@ -3,12 +3,9 @@ const { serviceModel } = require("../Models");
 // Controller to create service
 const create = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).send({ reason: "User id not found" });
-    }
     const Service = await serviceModel.insertOne({
       ...req.body,
-      Service_provider_id: req.user,
+      Service_provider_id: req.userID,
     });
     res.status(201).json({
       success: true,
@@ -27,10 +24,7 @@ const create = async (req, res) => {
 // Get all created Services of same user
 const getServices = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).send({ reason: "User id not found" });
-    }
-    const Services = await serviceModel.find({ Service_provider_id: req.user });
+    let Services = await serviceModel.find({ Service_provider_id: req.userID}).populate('Service_provider_id');
     if (Services.length === 0) {
       return res.status(404).send({ reason: "No Services found" });
     }
@@ -51,16 +45,13 @@ const getServices = async (req, res) => {
 //Get Service by particular id
 const get = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).send({ reason: "User id not found" });
-    }
     if (!req.query.id) {
-      return res.status(401).send({ reason: "id not found" });
+      return res.status(401).send({ reason: "id not found" }).populate('Service_provider_id');
     }
     const Service = await serviceModel.findOne({
       _id: req.query.id,
-      Service_provider_id: req.user,
-    });
+      Service_provider_id: req.userID,
+    }).populate('Service_provider_id');
     if (!Service) {
       return res.status(404).send({ reason: "No Service found" });
     }
@@ -80,9 +71,6 @@ const get = async (req, res) => {
 
 //Update a particular Service
 const update = async (req, res) => {
-  if (!req.user) {
-    return res.status(401).send({ reason: "User id not found" });
-  }
   try {
     if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
@@ -90,7 +78,7 @@ const update = async (req, res) => {
     const Service = await serviceModel.findOneAndUpdate(
       {
         _id: req.query.id,
-        Service_provider_id: req.user,
+        Service_provider_id: req.userID,
       },
       req.body,
       { new: true }
@@ -114,16 +102,13 @@ const update = async (req, res) => {
 
 //Delete a particular Service
 const remove = async (req, res) => {
-  if (!req.user) {
-    return res.status(401).send({ reason: "User id not found" });
-  }
   try {
     if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
     const Service = await serviceModel.findOneAndDelete({
       _id: req.query.id,
-      Service_provider_id: req.user,
+      Service_provider_id: req.userID,
     });
     if (!Service) {
       return res.status(404).send({ reason: "No Service found" });

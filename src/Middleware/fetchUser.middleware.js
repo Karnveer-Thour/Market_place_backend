@@ -8,7 +8,7 @@ const fetch = (req, res, next) => {
   }
   try {
     const data = jwt.verify(token, process.env.Secret);
-    req.user = data.user;
+    req.userID = data.user;
     next();
   } catch (error) {
     return res

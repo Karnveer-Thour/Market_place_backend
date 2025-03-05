@@ -3,7 +3,7 @@ const { jobModel } = require("../Models");
 // Create job controller
 const create = async (req, res) => {
   try {
-    const Job = await jobModel.insertOne({...req.body,Recruiter_id:req.user});
+    const Job = await jobModel.insertOne({...req.body,Recruiter_id:req.userID});
     res.status(201).json({
       success: true,
       message: "Job created successfully",
@@ -21,10 +21,7 @@ const create = async (req, res) => {
 // Get created jobs of same user
 const getJobs = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).send({ reason: "User id not found" });
-    }
-    const jobs = await jobModel.find({ Recruiter_id: req.user });
+    const jobs = await jobModel.find({ Recruiter_id: req.userID}).populate('Recruiter_id');
     if (jobs.length === 0) {
       return res.status(404).send({ reason: "No jobs found" });
     }
@@ -45,10 +42,7 @@ const getJobs = async (req, res) => {
 //Get job by particular id
 const get = async (req, res) => {
   try {
-    if (!req.query.id) {
-      return res.status(401).send({ reason: "id not found" });
-    }
-    const job = await jobModel.findOne({ _id: req.query.id,Recruiter_id:req.user });
+    const job = await jobModel.findOne({ _id: req.query.id,Recruiter_id:req.userID }).populate('Recruiter_id');
     if (!job) {
       return res.status(404).send({ reason: "No job found" });
     }
@@ -69,11 +63,8 @@ const get = async (req, res) => {
 //Update a particular job
 const update = async (req, res) => {
   try {
-    if (!req.query.id) {
-      return res.status(401).send({ reason: "id not found" });
-    }
     const job = await jobModel.findOneAndUpdate(
-      { _id: req.query.id,Recruiter_id:req.user },
+      { _id: req.query.id,Recruiter_id:req.userID},
       req.body,
       { new: true }
     );
@@ -100,7 +91,7 @@ const remove = async (req, res) => {
     if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
-    const job = await jobModel.findOneAndDelete({ _id: req.query.id,Recruiter_id:req.user });
+    const job = await jobModel.findOneAndDelete({ _id: req.query.id,Recruiter_id:req.userID });
     if (!job) {
       return res.status(404).send({ reason: "No job found" });
     }

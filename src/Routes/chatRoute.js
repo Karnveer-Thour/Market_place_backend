@@ -1,14 +1,22 @@
-const express=require('express');
-const { chatModel } = require('../Models');
+const express = require("express");
+const { chatModel } = require("../Models");
+const { fetchUser, chatMiddlewares } = require("../Middleware/Index");
+const { chatControllers } = require("../Controllers/Index");
 
-const router = express.Router({ mergeParams: true })
-router.get('/send',async(req,res)=>{
-    const newChat=await chatModel.insertOne({
-        senderId:"67c184b4b2897dabcc486f6f",
-        recieverId:"67c185310a256b69edcb27b1",
-        description:"Hello",
-        status:"recieved"
-    })
-    res.send(newChat);
-})
-module.exports=router;
+const router = express.Router({ mergeParams: true });
+
+//Send message
+router
+  .route("/send")
+  .post(fetchUser, chatMiddlewares.validateChat, chatControllers.Send);
+
+//Fetch messages
+router.route("/fetch").get(fetchUser, chatControllers.Fetch);
+
+//Update message
+router.route("/update").patch(fetchUser, chatControllers.Update);
+
+//Delete message
+router.route("/delete").delete(fetchUser, chatControllers.Delete);
+
+module.exports = router;

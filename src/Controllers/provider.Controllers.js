@@ -66,8 +66,7 @@ const login = async (req, res) => {
 // Get customer
 const get = async (req, res) => {
   try {
-    const userId = req.user;
-    const user = await providerModel.findById(userId).select("-password");
+    const user = await providerModel.findById(req.userID).select("-password");
     if (!user) {
       return res.status(401).send({ Reason: "User not found" });
     }
@@ -84,13 +83,12 @@ const get = async (req, res) => {
 // Delete Customer
 
 const remove = async (req, res) => {
-  const userId = req.user;
-  const user = await providerModel.findOne({ _id: userId });
+  const user = await providerModel.findOne({ _id: req.userID });
   if (!user) {
     return res.status(401).send({ Reason: "User not found" });
   }
   try {
-    const user = await providerModel.findOneAndDelete({ _id: userId });
+    const user = await providerModel.deleteOne({ _id: req.userID });
     res.status(201).json({
       success: true,
       message: "Provider deleted successfully",

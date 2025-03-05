@@ -5,4 +5,5 @@ module.exports = {
   serviceControllers: require("./service.Controllers"),
   paymentControllers: require("./payment.Controllers"),
   feedbackControllers: require("./feedback.Controllers"),
+  chatControllers: require("./chat.Controllers"),
 };

@@ -23,6 +23,10 @@ const schema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    type: {
+      type: String,
+      default: "Providers",
+    },
     Category: {
       type: Array,
       default: [],
