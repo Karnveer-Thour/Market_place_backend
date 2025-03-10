@@ -1,15 +1,15 @@
 const express=require('express');
-const { adminMiddlewares, fetchUser } = require('../Middleware/Index');
+const { adminMiddlewares, fetchUser, customerMiddlewares } = require('../Middleware/Index');
 const { adminControllers } = require('../Controllers/Index');
 const router=express.Router();
 
 //Route to register admin
 
-router.route("/register").post(adminMiddlewares.validateRegister,adminMiddlewares.existing,adminControllers.register);
+router.route("/register").post(customerMiddlewares.validateRegister,adminMiddlewares.existing,adminControllers.register);
 
 //Route to login admin
 
-router.route("/login").post(adminMiddlewares.validateLogin,adminControllers.login);
+router.route("/login").post(customerMiddlewares.validateLogin,adminControllers.login);
 
 //Route to get admin
 

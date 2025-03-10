@@ -7,7 +7,7 @@ const schema = new mongoose.Schema(
       minLength: [5, "Name must be at least 5 characters long"],
       required: true,
     },
-    Email: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
     },
     picture: String,
     Customer_ID: String,
-    Manual_Login: {
+    manual_Login: {
       type: Boolean,
       default: true,
     },
@@ -27,7 +27,7 @@ const schema = new mongoose.Schema(
       type: String,
       default: "Providers",
     },
-    Category: {
+    category: {
       type: Array,
       default: [],
     },

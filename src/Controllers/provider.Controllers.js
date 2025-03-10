@@ -30,7 +30,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     // Find the user by email
-    const user = await providerModel.findOne({ Email: req.body.Email });
+    const user = await providerModel.findOne({ email: req.body.email });
     if (!user) {
       return res.status(401).json({ reason: "Invalid credentials" });
     }
