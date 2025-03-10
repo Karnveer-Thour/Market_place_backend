@@ -1,4 +1,5 @@
 module.exports = {
+  adminModel:require('./admin.Model'),
   chatModel: require("./chat.Model"),
   customerModel: require("./customer.Model"),
   feedbackModel: require("./feedback.Model"),

@@ -1,4 +1,5 @@
 module.exports = {
+  adminMiddlewares: require("./admin.middlewares"),
   customerMiddlewares: require("./customer.middlewares"),
   providerMiddlewares: require("./provider.middlewares"),
   jobsMiddlewares: require("./job.middlewares"),

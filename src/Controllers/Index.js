@@ -1,4 +1,5 @@
 module.exports = {
+  adminControllers: require("./admin.controllers"),
   customerControllers: require("./customer.Controllers"),
   providerControllers: require("./provider.Controllers"),
   jobControllers: require("./job.Controllers"),

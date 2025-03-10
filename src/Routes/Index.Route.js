@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
 
 module.exports = {
   home: router,
+  adminRoute: require('./adminRoute'),
   customerRoute: require("./customerRoute"),
   providerRoute: require("./providerRoute"),
   jobRoute: require("./jobRoute"),

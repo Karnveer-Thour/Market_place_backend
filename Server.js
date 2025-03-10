@@ -10,6 +10,7 @@ const {
   chatRoute,
   feedbackRoute,
   paymentRoute,
+  adminRoute,
 } = require("./src/Routes/Index.Route.js");
 const { Mongoose } = require("./src/Database/index.js");
 const app = express();
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", home);
+app.use("/admin", adminRoute);
 app.use("/customer", customerRoute);
 app.use("/provider", providerRoute);
 app.use("/jobs", jobRoute);
