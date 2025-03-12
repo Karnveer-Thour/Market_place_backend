@@ -13,7 +13,7 @@ router.route("/login").post(customerMiddlewares.validateLogin,adminControllers.l
 
 //Route to get admin
 
-router.route("/get").get(fetchUser,adminControllers.get);
+router.route("/get").post(fetchUser,adminControllers.get);
 
 
 module.exports=router;

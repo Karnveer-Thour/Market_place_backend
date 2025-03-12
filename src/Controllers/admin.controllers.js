@@ -30,7 +30,8 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     // Find the user by email
-    const user = await adminModel.findOne({ email: req.body.email });
+    const email=RegExp(req.body.email,'i');
+    const user = await adminModel.findOne({ email:email});
     if (!user) {
       return res.status(401).json({ reason: "Invalid credentials" });
     }
@@ -70,7 +71,7 @@ const get = async (req, res) => {
     if (!user) {
       return res.status(401).send({ Reason: "User not found" });
     }
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Admin fetched successfully",
       user: user,
