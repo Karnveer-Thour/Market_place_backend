@@ -15,5 +15,13 @@ router.route("/login").post(customerMiddlewares.validateLogin,adminControllers.l
 
 router.route("/get").post(fetchUser,adminControllers.get);
 
+//update route for customer
+
+router.route("/update").patch(fetchUser, adminControllers.update);
+
+
+//Delete route for Admin
+
+router.route("/delete").delete(fetchUser, adminControllers.remove);
 
 module.exports=router;

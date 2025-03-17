@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 const customerModel = require("../Models/customer.Model");
 // Validate customer Registration
 const validateRegister = [
-  body("name", "Name cannot be empty").notEmpty(),
+  body("first_name", "Name cannot be empty").notEmpty(),
   body("email", "Enter a valid email").isEmail(),
   body("password", "Password must be of minimum 8 Characters").isLength({
     min: 8,

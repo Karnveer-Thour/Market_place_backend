@@ -81,8 +81,56 @@ const get = async (req, res) => {
   }
 };
 
+// Update Admin
+
+const update = async (req, res) => {
+  const userId = await adminModel.findOne({ _id: req.userID });
+  if (!userId) {
+    return res.status(401).send({ Reason: "User not found" });
+  }
+  try {
+    const user = await adminModel.findOneAndUpdate({_id:userId},req.body,{new:true});
+    res.status(201).json({
+      success: true,
+      message: "Customer deleted successfully",
+      user: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: err.message,
+    });
+  }
+};
+
+// Delete Admin
+
+const remove = async (req, res) => {
+  const userId = await adminModel.findOne({ _id: req.userID });
+  if (!userId) {
+    return res.status(401).send({ Reason: "User not found" });
+  }
+  try {
+    const user = await adminModel.findOneAndDelete({ _id: userId });
+    res.status(201).json({
+      success: true,
+      message: "Customer deleted successfully",
+      user: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: err.message,
+    });
+  }
+};
+
 module.exports={
     register,
     login,
-    get
+    get,
+    update,
+    remove
 }
