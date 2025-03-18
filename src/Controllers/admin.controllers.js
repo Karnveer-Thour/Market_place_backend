@@ -89,10 +89,10 @@ const update = async (req, res) => {
     return res.status(401).send({ Reason: "User not found" });
   }
   try {
-    const user = await adminModel.findOneAndUpdate({_id:userId},req.body,{new:true});
+    const user = await adminModel.findOneAndUpdate({_id:userId},req.body,{new:true}).select("-password");
     res.status(201).json({
       success: true,
-      message: "Customer deleted successfully",
+      message: "Customer updated successfully",
       user: user,
     });
   } catch (err) {

@@ -44,6 +44,10 @@ const schema= mongoose.Schema({
       postal_code:{
         type: Number,
         default: undefined
+      },
+      imageURL:{
+        type:String,
+        default:"https://res.cloudinary.com/dszgssbnh/image/upload/v1742277062/Marketplace/qonrl45r3a5jmnpl12dv.jpg"
       }
 });
 
