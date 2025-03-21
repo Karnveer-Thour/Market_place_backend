@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 // Register a Admin
 const register = async (req, res) => {
   try {
+    console.log(req.body);
     const hashPassword = await bcrypt.hash(req.body.password + secret, 10);
     const newUser = await adminModel.insertOne({
       ...req.body,
@@ -18,6 +19,7 @@ const register = async (req, res) => {
       token: token,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       message: "Something went wrong",

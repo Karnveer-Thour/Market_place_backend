@@ -5,7 +5,7 @@ const router=express.Router();
 
 //Route to register admin
 
-router.route("/register").post(customerMiddlewares.validateRegister,adminMiddlewares.existing,adminControllers.register);
+router.route("/register").post(adminMiddlewares.validateRegister,adminMiddlewares.existing,adminControllers.register);
 
 //Route to login admin
 
