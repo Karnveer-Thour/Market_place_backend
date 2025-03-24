@@ -24,4 +24,8 @@ router.route("/update").patch(fetchUser, adminControllers.update);
 
 router.route("/delete").delete(fetchUser, adminControllers.remove);
 
+//Change password route for admin
+
+router.route("/update/password").put(fetchUser,adminControllers.updatePassword)
+
 module.exports=router;

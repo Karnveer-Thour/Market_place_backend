@@ -129,10 +129,43 @@ const remove = async (req, res) => {
   }
 };
 
+// Change password for admin
+const updatePassword = async (req, res) => {
+  try {
+    const user = await adminModel.findById(req.userID);
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password + secret,
+      user.password
+    );
+    if (!isPasswordValid) {
+      return res.status(401).send({ Reason: "invalid password" });
+    }
+    if(!req.body.newPassword){
+      return res.status(401).send({ Reason: "New password can't be empty" });
+    }
+    const samePassword=await bcrypt.compare(
+      req.body.newPassword + secret,
+      user.password
+    );
+    const newPassword=await bcrypt.hash(req.body.newPassword + secret, 10);
+    if(samePassword){
+      return res.status(401).send({ Reason: "New password can't be same" });
+    }
+    await adminModel.findOneAndUpdate({_id:user},{password:newPassword},{new:true});
+    res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+    });
+  } catch (error) {
+    res.status(401).send({ Reason: "Internal Server Error" });
+  }
+};
+
 module.exports={
     register,
     login,
     get,
     update,
-    remove
+    remove,
+    updatePassword
 }
