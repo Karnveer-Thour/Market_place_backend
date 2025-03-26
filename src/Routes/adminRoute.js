@@ -26,6 +26,22 @@ router.route("/delete").delete(fetchUser, adminControllers.remove);
 
 //Change password route for admin
 
-router.route("/update/password").put(fetchUser,adminControllers.updatePassword)
+router.route("/update/password").put(fetchUser,adminControllers.updatePassword);
+
+//Fetch Customers route for admin
+
+router.route("/get/Customers").get(fetchUser,adminControllers.getCustomers);
+
+//Fetch Providers route for admin
+
+router.route("/get/Providers").get(fetchUser,adminControllers.getProviders);
+
+//Fetch Services route for admin
+
+router.route("/get/Services").get(fetchUser,adminControllers.getServices);
+
+//Fetch Jobs route for admin
+
+router.route("/get/Jobs").get(fetchUser,adminControllers.getJobs);
 
 module.exports=router;

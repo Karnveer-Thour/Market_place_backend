@@ -25,7 +25,7 @@ const schema = new mongoose.Schema(
     },
     type: {
       type: String,
-      default: "Customers",
+      default: "Customer",
     },
     rating: {
       type: Number,
