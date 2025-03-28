@@ -20,7 +20,10 @@ router
 // Getuser route for customer
 router.route("/get").post(fetchUser, customerControllers.get);
 
+// Deleteuser route for customer
+router.route("/update").patch( fetchUser,customerControllers.update);
+
 //Deleteuser route for customer
-router.route("/delete").delete(fetchUser, customerControllers.remove);
+router.route("/delete").delete( fetchUser,customerControllers.remove);
 
 module.exports = router;

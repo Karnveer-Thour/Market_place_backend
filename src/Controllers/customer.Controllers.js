@@ -80,15 +80,35 @@ const get = async (req, res) => {
   }
 };
 
+const update=async(req,res)=>{
+  try{
+    const user = await customerModel.findOneAndUpdate({ _id: req.query.id }, req.body, { new: true })
+    .select("-password");
+    if(!user){
+      return res.status(404).json({message:"User not found"});
+    }
+    res.status(201).json({
+      success: true,
+      message: "Customer updated successfully",
+      user: user,
+    });
+  }catch(err){
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: err.message,
+    });
+  }
+}
+
 // Delete Customer
 
 const remove = async (req, res) => {
-  const user = await customerModel.findOne({ _id: req.userID });
-  if (!user) {
-    return res.status(401).send({ Reason: "User not found" });
-  }
   try {
-    const user = await customerModel.findOneAndDelete({ _id: userId });
+    const user = await customerModel.findOneAndDelete({ _id: req.query.id },{new:true});
+    if(!user){
+      return res.status(404).json({message:"User not found"});
+    }
     res.status(201).json({
       success: true,
       message: "Customer deleted successfully",
@@ -106,5 +126,6 @@ module.exports = {
   register,
   login,
   get,
+  update,
   remove,
 };
