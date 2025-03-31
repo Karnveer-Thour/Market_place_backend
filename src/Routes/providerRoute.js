@@ -26,6 +26,8 @@ router
 //Get route for provider
 router.route("/get").post(fetchUser, providerControllers.get);
 
+router.route("/update").patch(fetchUser, providerControllers.update);
+
 //Delete route for Provider
 router.route("/delete").delete(fetchUser, providerControllers.remove);
 
