@@ -32,6 +32,7 @@ const schema = new mongoose.Schema(
     },
     status: {
       type: String,
+      enum:["Pending","Completed"],
       default: "Pending",
     },
   },

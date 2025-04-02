@@ -64,7 +64,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
   try {
     const job = await jobModel.findOneAndUpdate(
-      { _id: req.query.id,Recruiter_id:req.userID},
+      { _id: req.query.id},
       req.body,
       { new: true }
     );
@@ -91,7 +91,7 @@ const remove = async (req, res) => {
     if (!req.query.id) {
       return res.status(401).send({ reason: "id not found" });
     }
-    const job = await jobModel.findOneAndDelete({ _id: req.query.id,Recruiter_id:req.userID });
+    const job = await jobModel.findOneAndDelete({ _id: req.query.id});
     if (!job) {
       return res.status(404).send({ reason: "No job found" });
     }

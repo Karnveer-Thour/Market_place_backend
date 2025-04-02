@@ -78,7 +78,6 @@ const update = async (req, res) => {
     const Service = await serviceModel.findOneAndUpdate(
       {
         _id: req.query.id,
-        Service_provider_id: req.userID,
       },
       req.body,
       { new: true }
@@ -108,7 +107,6 @@ const remove = async (req, res) => {
     }
     const Service = await serviceModel.findOneAndDelete({
       _id: req.query.id,
-      Service_provider_id: req.userID,
     });
     if (!Service) {
       return res.status(404).send({ reason: "No Service found" });
